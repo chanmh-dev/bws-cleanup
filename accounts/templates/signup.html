@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  body {
+    background: #eaf6f6;
+  }
+</style>
+<h1 style="text-align: center; margin-top: 1em">Register (注册)</h1>
+<div class="container d-flex align-items-center justify-content-center">
+  <form class="site-form" action="" method="post">
+    {% csrf_token %} {{form}}
+    <input
+      class="btn btn-info"
+      type="submit"
+      value="Register (注册)"
+      style="margin-top: 1em"
+    />
+  </form>
+</div>
+{% endblock content %}

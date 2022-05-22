@@ -1,0 +1,184 @@
+{% extends 'base.html' %} {% load static %} {% block title %}
+<title>释迦心咒</title>
+{% endblock title %} {% block additional_styles %}
+<style>
+  body {
+    min-height: 100vh;
+    background: #eaf6f6;
+    /*background-image: url(/static/images/cloud_rainbow.jpg);*/
+    background-repeat: no-repeat;
+  }
+
+  .container-fluid {
+    padding: 0;
+  }
+
+  input[type="number"] {
+    width: 120px;
+  }
+
+  .category-name {
+    font-size: 2rem;
+  }
+
+  .category-title {
+    font-size: 1.4rem;
+  }
+
+  .btn {
+    margin-bottom: 0.3rem;
+  }
+
+  .new-counter-box {
+    background: #5463ff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card {
+    opacity: 0.95;
+  }
+
+  .counter-box {
+    display: block;
+    background: #5463ff;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    text-align: center;
+  }
+
+  .counter-box p {
+    margin: 5px 0 0;
+    padding: 0;
+    color: #f2f2f2;
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  .counter-box i {
+    font-size: 60px;
+    margin: 8px;
+    color: #d2d2d2;
+  }
+
+  .counter {
+    display: block;
+    font-size: 32px;
+    font-weight: 600;
+    color: #f2f2f2;
+    line-height: 28px;
+  }
+
+  .counter-box.colored {
+    background: #3acf87;
+  }
+
+  .counter-box.colored p,
+  .counter-box.colored i,
+  .counter-box.colored .counter {
+    color: #f2f2f2;
+  }
+
+  #myVideo {
+    position: absolute;
+    right: 0;
+    top: 70px;
+    min-width: 100%;
+    height: 100%%;
+  }
+</style>
+{% endblock %} {% block content %}
+
+<video autoplay muted loop id="myVideo">
+  <source src="/static/media/sky.mp4" type="video/mp4" />
+  Your browser does not support HTML5 video.
+</video>
+
+<div class="container-fluid">
+  <ul class="social mb-0 list-inline mt-4"></ul>
+  <div class="row pb-5 mb-4 justify-content-center">
+    <div class="col-lg-4">
+      <a id="target-migtsema"></a>
+      <!-- Card-->
+      <div class="card rounded shadow-sm border-0">
+        <div class="card-body p-0">
+          <img
+            src="{% static 'images/vesak.jpg' %}"
+            alt=""
+            class="w-100 card-img-top"
+          />
+          <!--img-->
+          <ul class="social mb-0 list-inline mt-2"></ul>
+          <div class="container-fluid">
+            <div class="row justify-content-center">
+              <div class="col-6 col-xs-6">
+                <div class="counter-box colored">
+                  <i class="fas fa-praying-hands"></i>
+                  <span class="counter card-counter">{{misc_can_counter}}</span>
+                  <p style="color: red">{{request.user}}</p>
+                </div>
+              </div>
+              <div class="col-6 col-xs-6">
+                <div class="counter-box">
+                  <i class="fa-solid fa-user-group"></i>
+                  <span class="counter card-counter"
+                    >{{total_misc_can_counter}}</span
+                  >
+                  <p style="color: orange">Total (总数)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ul class="social mb-0 list-inline mt-2"></ul>
+          <div class="row justify-content-center">
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none">
+                <input name="anchor-tag" value="#target-migtsema" />
+                {{form_misc.misc_glass_bottle_counter}}
+                {{form_misc.misc_mask_counter}}
+                {{form_misc.misc_others_counter}}
+              </div>
+              {{form_misc.misc_can_counter}}
+              <input
+                type="submit"
+                class="btn btn-info btn-sm"
+                name="btnMigtsema"
+                value="Add (添加)"
+              />
+            </form>
+          </div>
+          <ul class="social mb-0 list-inline mt-2"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $("#migtsema-counter").text("{{misc_can_counter}}");
+    $("#total-migtsema-counter").text("{{total_misc_can_counter}}");
+
+    $(".card-counter").each(function () {
+      $(this)
+        .prop("Counter", 0)
+        .animate(
+          {
+            Counter: $(this).text(),
+          },
+          {
+            duration: 3000,
+            easing: "swing",
+            step: function (now) {
+              $(this).text(Math.ceil(now));
+            },
+          }
+        );
+    });
+  });
+</script>
+
+{% endblock content %} {% block script_content %} {% endblock script_content %}

@@ -1,0 +1,413 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>My Clean up</title>
+{% endblock title %}
+
+{% block additional_styles %}
+<style>
+	body {
+		min-height: 100vh;
+		background: #eaf6f6;
+	}
+  
+	input[type=number]{
+		width: 120px;
+	}
+	
+	.category-name{
+		font-size:2rem;			
+	}
+	
+	.category-title{
+		font-size:1.4rem;			
+	}
+
+  .btn{
+    margin-bottom: 0.3rem;
+  }
+	
+</style>
+{% endblock %}    
+
+{% block content %}
+<div id='container1'></div>
+ 
+<div class="container-fluid py-0" style="padding:10%">
+  <!-- For Demo Purpose-->
+
+    <h1 class="display-4 font-weight-bold">My Clean up ({{request.user}})</h1>
+	<br>
+  
+   <!-- First Row [Team]-->
+  <h2 class="font-weight-bold mb-0 category-name mb-4">Plastic</h2>
+  <div class="row pb-5 mb-4">
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <a id="target-full-prostration"></a>
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/plastic-bag.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title" >Bag</h5>
+			<div class="card-counter font-weight-bold" id="full-prostration-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2">
+             
+				<form action="" method="post">          
+          {% csrf_token %}
+          <div id="divHiddenbox" style="display: none;">
+            <input name="anchor-tag" value="#target-full-prostration">
+            <script>
+              //document.getElementById('usernameId').value = "{{ request.user }}";
+              var user = "{{ request.user }}"
+              var userId = "{{ request.user.id }}"
+              console.log(user)
+              console.log(userId)
+            </script>            
+            {{form_plastic.plastic_bottle_counter}}
+            {{form_plastic.plastic_wrapper_counter}}
+            {{form_plastic.plastic_cup_straw_counter}}
+          </div>
+					{{form_plastic.plastic_bag_counter}}
+          <input type="submit" class="btn btn-info btn-sm" name="btnFullProstration" value="Add (添加)">
+			  </form>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <a id="target-half-prostration"></a>
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/plastic-bottle.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Bottle</h5>
+			      <div class="card-counter font-weight-bold" id="half-prostration-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>	
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none;">   
+                <input name="anchor-tag" value="#target-half-prostration">     
+                {{form_plastic.plastic_bag_counter}}
+                {{form_plastic.plastic_wrapper_counter}}
+                {{form_plastic.plastic_cup_straw_counter}}
+              </div>              
+              {{form_plastic.plastic_bottle_counter}}
+              <input type="submit" class="btn btn-info btn-sm" name="btnHalfProstration" value="Add (添加)">
+            </form>			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <a id="target-bow"></a>
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/plastic-wrapper.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">wrapper</h5>
+			<div class="card-counter font-weight-bold" id="bow-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>			
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none;">  
+                <input name="anchor-tag" value="#target-bow">       
+                {{form_plastic.plastic_bag_counter}}
+                {{form_plastic.plastic_bottle_counter}}
+                {{form_plastic.plastic_cup_straw_counter}}
+              </div>               
+              {{form_plastic.plastic_wrapper_counter}}
+              <input type="submit" class="btn btn-info btn-sm" name="btnBow" value="Add (添加)">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <a id="target-recitation"></a>
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/plastic-cup.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Cup and Straw</h5>
+			<div class="card-counter font-weight-bold" id="recitation-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>			
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none;">  
+                <input name="anchor-tag" value ="#target-recitation">       
+                {{form_plastic.plastic_bag_counter}}
+                {{form_plastic.plastic_bottle_counter}}
+                {{form_plastic.plastic_wrapper_counter}}
+              </div>               
+              {{form_plastic.plastic_cup_straw_counter}}
+              <input type="submit" class="btn btn-info btn-sm" name="btnRecitation" value="Add (添加)">
+            </form>			
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  <!-- Second Row [Team]-->
+  <h2 class="font-weight-bold mb-0 category-name mb-4">Paper</h2>
+  <div class="row pb-5 mb-4">
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <a id="target-mahaprajnaparamita-sutra"></a>
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/paper-tissue.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Tissue</h5>
+            <p class="font-weight-bold small text-muted">Mahaprajnaparamita Sutra</p>
+			<div class="card-counter font-weight-bold" id="mahaprajnaparamita-sutra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none;"> 
+                <input name="anchor-tag" value="#target-mahaprajnaparamita-sutra">
+                {{form_paper.paper_counter}}        
+                {{form_paper.paper_cup_counter}}
+                {{form_paper.paper_cigarette_butt_counter}}
+              </div>               
+              {{form_paper.paper_tissue_counter}}
+              <input type="submit" class="btn btn-info btn-sm" name="btnMahaprajnaparamita" value="Add (添加)">
+            </form>			
+			
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <a id="target-heart-sutra"></a>
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/paper.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">paper</h5></h5>
+			<div class="card-counter font-weight-bold" id="heart-sutra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none;"> 
+                <input name="anchor-tag" value="#target-heart-sutra">
+                {{form_paper.paper_tissue_counter}}     
+                {{form_paper.paper_cup_counter}}
+                {{form_paper.paper_cigarette_butt_counter}}
+              </div>               
+              {{form_paper.paper_counter}}   
+              <input type="submit" class="btn btn-info btn-sm" name="btnHeartSutra" value="Add (添加)">
+            </form>	
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <a id="target-medicine-buddha-sutra"></a>
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/paper-cup.jpg' %}" alt="" class="w-100 card-img-top">
+			<div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Cup</h5>
+			<div class="card-counter font-weight-bold" id="medicine-buddha-sutra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none;"> 
+                <input name="anchor-tag" value="#target-medicine-buddha-sutra">
+                {{form_paper.paper_tissue_counter}}  
+                {{form_paper.paper_counter}}    
+                {{form_paper.paper_cigarette_butt_counter}}
+              </div>               
+              {{form_paper.paper_cup_counter}}  
+              <input type="submit" class="btn btn-info btn-sm" name="btnMedicineBuddhaSutra" value="Add (添加)">
+            </form>	
+			</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <a id="target-golden-light-sutra"></a>
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/paper-cigarette-butt.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Cigarette butt</h5>
+			<div class="card-counter font-weight-bold" id="golden-light-sutra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none;"> 
+                <input name="anchor-tag" value="#target-golden-light-sutra">
+                {{form_paper.paper_tissue_counter}}  
+                {{form_paper.paper_counter}}   
+                {{form_paper.paper_cup_counter}}  
+              </div>               
+              {{form_paper.paper_cigarette_butt_counter}} 
+              <input type="submit" class="btn btn-info btn-sm" name="btnGoldenLightSutra" value="Add (添加)">
+            </form>	
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Third Row [Profiles]-->
+  <h2 class="font-weight-bold mb-0 category-name mb-4"></h2>
+
+  <div class="row pb-5 mb-4">
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <a id="target-migtsema"></a>
+      <!-- Card-->
+      <div class="card rounded shadow-sm border-0">
+        <div class="card-body p-0"><img src="{% static 'images/metal-can.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Can</h5>
+			<div class="card-counter font-weight-bold" id="migtsema-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none;">
+                <input name="anchor-tag" value="#target-migtsema"> 
+                {{form_misc.misc_glass_bottle_counter}}    
+                {{form_misc.misc_mask_counter}}                                                   
+                {{form_misc.misc_others_counter}}
+              </div>               
+              {{form_misc.misc_can_counter}}
+              <input type="submit" class="btn btn-info btn-sm" name="btnMigtsema" value="Add (添加)">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>    
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <a id="target-om-mani-padme-hum"></a>
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/glass-bottle.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Glass Bottle</h5>
+			<div class="card-counter font-weight-bold" id="om-mani-padme-hum-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none;"> 
+                <input name="anchor-tag" value="#target-om-mani-padme-hum">
+                {{form_misc.misc_mask_counter}}  
+                {{form_misc.misc_others_counter}}   
+                {{form_misc.misc_can_counter}}  
+              </div>               
+              {{form_misc.misc_glass_bottle_counter}} 
+              <input type="submit" class="btn btn-info btn-sm" name="btnOmManiPadmeHum" value="Add (添加)">
+            </form>	
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <a id="target-manjushri-mantra"></a>
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/paper-mask.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Mask</h5>
+			<div class="card-counter font-weight-bold" id="manjushri-mantra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none;"> 
+                <input name="anchor-tag" value="#target-manjushri-mantra">
+                {{form_misc.misc_glass_bottle_counter}}                 
+                {{form_misc.misc_others_counter}}   
+                {{form_misc.misc_can_counter}}  
+              </div>               
+              {{form_misc.misc_mask_counter}} 
+              <input type="submit" class="btn btn-info btn-sm" name="btnManjushriMantra" value="Add (添加)">
+            </form>	
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <a id="target-green-tara-mantra"></a>
+      <div class="card rounded shadow-sm border-0">
+        <div class="card-body p-0"><img src="{% static 'images/garbage.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Others</h5>
+			<div class="card-counter font-weight-bold" id="green-tara-mantra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <form action="" method="post">
+              {% csrf_token %}
+              <div id="divHiddenbox" style="display: none;"> 
+                <input name="anchor-tag" value="#target-green-tara-mantra">
+                {{form_misc.misc_glass_bottle_counter}}    
+                {{form_misc.misc_mask_counter}}                                 
+                {{form_misc.misc_can_counter}}  
+              </div>               
+              {{form_misc.misc_others_counter}}
+              <input type="submit" class="btn btn-info btn-sm" name="btnGreenTaraMantra" value="Add (添加)">
+            </form>	
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+	$(document).ready(function() {
+    $('#full-prostration-counter').text('{{plastic_bag_counter}}');
+    $('#half-prostration-counter').text('{{plastic_bottle_counter}}');
+    $('#bow-counter').text('{{plastic_wrapper_counter}}');
+    $('#recitation-counter').text('{{plastic_cup_straw_counter}}');
+
+    $('#mahaprajnaparamita-sutra-counter').text('{{paper_tissue_counter}}');
+    $('#heart-sutra-counter').text('{{paper_counter}}');
+    $('#medicine-buddha-sutra-counter').text('{{paper_cup_counter}}');
+    $('#golden-light-sutra-counter').text('{{paper_cigarette_butt_counter}}');
+
+    $('#om-mani-padme-hum-counter').text('{{misc_glass_bottle_counter}}');
+    $('#manjushri-mantra-counter').text('{{misc_mask_counter}}');
+    $('#green-tara-mantra-counter').text('{{misc_others_counter}}');
+    $('#migtsema-counter').text('{{misc_can_counter}}');
+
+    $('.card-counter').each(function () {
+    $(this).prop('Counter',0).animate({
+    Counter: $(this).text()
+    }, {
+        duration: 3000,
+        easing: 'swing',
+        step: function (now) {
+        $(this).text(Math.ceil(now));
+        }
+      });
+    });
+	});
+</script>
+
+{% endblock content %}
+
+{% block script_content %}
+
+{% endblock script_content %}   
+
+

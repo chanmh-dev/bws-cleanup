@@ -1,0 +1,353 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Clean up</title>
+{% endblock title %}
+
+{% block additional_styles %}
+<style>
+	body {
+		min-height: 100vh;
+		background: #eaf6f6;
+	}
+  
+	input[type=number]{
+		width: 120px;
+	}
+	
+	.category-name{
+		font-size:2rem;			
+	}
+	
+	.category-title{
+		font-size:1.4rem;			
+	}
+
+  .btn{
+    margin-bottom: 0.3rem;
+  }
+	
+</style>
+{% endblock %}    
+
+{% block content %}
+<div id='container1'></div>
+ 
+<div class="container-fluid py-0" style="padding:10%">
+  <!-- For Demo Purpose-->
+
+    <h1 class="display-4 font-weight-bold">Clean up (Total)</h1>
+	<br>
+  
+   <!-- First Row [Team]-->
+  <h2 class="font-weight-bold mb-0 category-name mb-4">Plastic</h2>
+
+  <div class="row pb-5 mb-4">
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/plastic-bag.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title" >Bag</h5>
+			      <div class="card-counter font-weight-bold" id="full-prostration-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{plastic_bag_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='false' value='{{plastic_bag_target}}'></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{plastic_bag_counter}}'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/plastic-bottle.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Bottle</h5>
+			      <div class="card-counter font-weight-bold" id="half-prostration-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{plastic_bottle_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='true' value={{plastic_bottle_target}}></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{plastic_bottle_counter}}'></div>
+            </div>		
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/plastic-wrapper.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Wrapper</h5>
+			      <div class="card-counter font-weight-bold" id="bow-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{plastic_wrapper_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='true' value='{{plastic_wrapper_target}}'></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{plastic_wrapper_counter}}'></div>
+            </div>				
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/plastic-cup.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Cup and Straw</h5>
+			      <div class="card-counter font-weight-bold" id="recitation-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{plastic_cup_straw_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='true' value='{{plastic_cup_straw_target}}'></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{plastic_cup_straw_counter}}'></div>
+            </div>				
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  <!-- Second Row [Team]-->
+  <h2 class="font-weight-bold mb-0 category-name mb-4">Paper</h2>
+  <div class="row pb-5 mb-4">
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/paper-tissue.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Tissue</h5>
+			      <div class="card-counter font-weight-bold" id="mahaprajnaparamita-sutra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{paper_tissue_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='true' value='{{paper_tissue_target}}'></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{paper_tissue_counter}}'></div>
+            </div>	
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/paper.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">paper</h5></h5>
+			      <div class="card-counter font-weight-bold" id="heart-sutra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{paper_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='true' value='{{paper_target}}'></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{paper_counter}}'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/paper-cup.jpg' %}" alt="" class="w-100 card-img-top">
+			    <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Cup</h5>
+			      <div class="card-counter font-weight-bold" id="medicine-buddha-sutra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{paper_cup_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='true' value='{{paper_cup_target}}'></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{paper_cup_counter}}'></div>
+            </div>
+			    </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/paper-cigarette-butt.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Cigarette butt</h5>
+			      <div class="card-counter font-weight-bold" id="golden-light-sutra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{paper_cigarette_butt_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='true' value='{{paper_cigarette_butt_target}}'></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{paper_cigarette_butt_counter}}'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Third Row [Profiles]-->
+  <h2 class="font-weight-bold mb-0 category-name mb-4"></h2>
+  <div class="row pb-5 mb-4">
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card rounded shadow-sm border-0">
+        <div class="card-body p-0"><img src="{% static 'images/metal-can.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Can</h5>
+			      <div class="card-counter font-weight-bold" id="migtsema-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{misc_can_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='true' value='{{misc_can_target}}'></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{misc_can_counter}}'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/glass-bottle.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Glass Bottle</h5>
+			      <div class="card-counter font-weight-bold" id="om-mani-padme-hum-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{misc_glass_bottle_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='true' value='{{misc_glass_bottle_target}}'></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{misc_glass_bottle_counter}}'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded">
+        <div class="card-body p-0"><img src="{% static 'images/paper-mask.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Mask</h5>
+			      <div class="card-counter font-weight-bold" id="manjushri-mantra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{misc_mask_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='true' value='{{misc_mask_target}}'></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{misc_mask_counter}}'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <!-- Card-->
+      <div class="card rounded shadow-sm border-0">
+        <div class="card-body p-0"><img src="{% static 'images/garbage.jpg' %}" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h5 class="font-weight-bold mb-0 category-title">Others</h5>
+			      <div class="card-counter font-weight-bold" id="green-tara-mantra-counter" style="font-size: 35px">0</div>
+            <ul class="social mb-0 list-inline mt-2"></ul>
+            <h5 class="font-weight-bold mb-0" >Target: {{misc_others_target}}</h5>
+            <br>
+            <ul class="social mb-0 list-inline mt-3"></ul>
+            <div class='bar_group'>
+              <div style="display: none;" class='bar_group__bar thick' tooltip='true' value='{{misc_others_target}}'></div>
+              <div class='bar_group__bar thick' show_values='true' tooltip='true' value='{{misc_others_counter}}'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!--
+  <h2 class="font-weight-bold mb-2">Latest Statistics</h2>
+
+  <div class='bar_group'>
+    <div class='bar_group__bar thick' label='jQuery' show_values='true' tooltip='true' value='343'></div>
+    <div class='bar_group__bar thick' label='AJAX' show_values='true' tooltip='true' value='235'></div>
+    <div class='bar_group__bar thick' label='PHP' show_values='true' tooltip='true' value='675'></div>
+    <div class='bar_group__bar thick' label='SASS' show_values='true' tooltip='true' value='456'></div>
+    <div class='bar_group__bar thick' label='HAML' show_values='true' tooltip='true' value='245'></div>
+  </div>
+-->
+
+</div>
+<script src="{% static 'bars.js' %}"></script>
+
+<script>
+	$(document).ready(function() {
+    $('#full-prostration-counter').text('{{plastic_bag_counter}}');
+    $('#half-prostration-counter').text('{{plastic_bottle_counter}}');
+    $('#bow-counter').text('{{plastic_wrapper_counter}}');
+    $('#recitation-counter').text('{{plastic_cup_straw_counter}}');
+
+    $('#mahaprajnaparamita-sutra-counter').text('{{paper_tissue_counter}}');
+    $('#heart-sutra-counter').text('{{paper_counter}}');
+    $('#medicine-buddha-sutra-counter').text('{{paper_cup_counter}}');
+    $('#golden-light-sutra-counter').text('{{paper_cigarette_butt_counter}}');
+
+    $('#om-mani-padme-hum-counter').text('{{misc_glass_bottle_counter}}');
+    $('#manjushri-mantra-counter').text('{{misc_mask_counter}}');
+    $('#green-tara-mantra-counter').text('{{misc_others_counter}}');
+    $('#migtsema-counter').text('{{misc_can_counter}}');
+
+    $('.card-counter').each(function () {
+    $(this).prop('Counter',0).animate({
+    Counter: $(this).text()
+    }, {
+        duration: 3000,
+        easing: 'swing',
+        step: function (now) {
+        $(this).text(Math.ceil(now));
+        }
+      });
+    });
+	});
+</script>
+
+{% endblock content %}
+
+{% block script_content %}
+
+{% endblock script_content %}   
+
+

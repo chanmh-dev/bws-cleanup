@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Virtuous Deeds Offerings 善行供养</title>
+{% endblock title %}
+
+
+{% block content %}
+  <div id='container1'></div>
+  <div class="container-fluid" >
+    <h1 >Virtuous Deeds Offerings 善行供养 <input type="password" id="pwd" name="pwd" minlength="8"> <button type="button" onclick="mandala()">Mandala Offering</button></h1>   
+    <br>
+    <div class="row">
+      <div class="col text-center">
+        <img src = "{% static 'images/TripleGem.gif' %}" alt =""  class="img-fluid " class="center">
+        <div class="comment">
+          {% if mobile == True %}
+            <textarea readonly class="textinput" rows="15" style="background-color: #ffe6ff">
+OMAK is the treasure that Master has gifted us to transform our obscurations;
+Little Virtuous Deeds is the gentle reminder from Teacher to accumulate our merits;
+both are supreme rare treasures that benefit ourselves and others in this and future lifetimes.
+Let's offer the practice of virtuous deeds to the Buddhas and Bodhisattvas starting from today!
+Submission time (Daily) :  10.15pm - 10.45pm   
+
+观功念恩是师父赐予我们翻转业力的法宝；
+善行点滴是老师给予我们累积净业的叮咛；
+二者皆是无上的财宝，
+能令自他生生世世受用不尽！
+今天就开始总结自己每天的善行，
+供养尊贵的师长佛菩萨！
+
+每日开放供养善行的时间:
+10.15pm - 10.45pm </textarea>
+		    {% else %}
+          <textarea readonly class="textinput" rows="6" style="background-color: #ffe6ff">
+OMAK is the treasure that Master has gifted us to transform our obscurations; Little Virtuous Deeds is the gentle reminder from Teacher to accumulate our merits;
+both are supreme rare treasures that benefit ourselves and others in this and future lifetimes. Let's offer the practice of virtuous deeds to the Buddhas and Bodhisattvas starting from today!  
+观功念恩是师父赐予我们翻转业力的法宝；善行点滴是老师给予我们累积净业的叮咛；二者皆是无上的财宝，能令自他生生世世受用不尽！
+今天就开始总结自己每天的善行，供养尊贵的师长佛菩萨！
+每日开放供养善行的时间 Submission time (Daily): 10.15pm - 10.45pm </textarea>
+        {% endif %}
+      </div>
+
+    </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm">
+          <div id = "jumbo1"  class = "jumbotron jumbotron-fluid">
+            <div class="container">
+              <p style="font-weight: 700">Virtuous deeds</p>
+              <p style="font-weight: 600">(Target: All sentient beings)</p>
+              <p style="font-weight: 400">No acts of kindness is ever too small, let's share more and inspire others to rejoice and do the same.</p>
+              <p style="font-weight: 800">善行点滴 (对象：一切有情)</p>
+              <p style="font-weight: 500">莫因善小而不为，多分享可启发他人随喜、行善。</p>
+            </div>
+          </div>
+            {{deed3 | safe}}
+            {% if hide == False %}
+              <form action="" method="post">
+                {% csrf_token %}
+                <h5 style="background-color: #ffcccc">
+                {{ form3.as_p }}
+                </h5>
+                <input type="submit" name="btnform3" value="Submit (供养)" onclick="validate3()">
+              </form>
+            {% endif %}
+          </div>
+
+          <div class="col-sm">
+          <div id = "jumbo2"  class = "jumbotron jumbotron-fluid">
+            <div class="container">
+              <p style="font-weight: 700">OMAK</p>
+              <p style="font-weight: 600">(Target: All sentient beings, starting with those around us.)</p>
+              <p style="font-weight: 400">Through observing the merits of others, we gradually overcome seeing faults in others.</p>
+              <p style="font-weight: 800">观功念恩 (对象：一切有情，先从周围的人开始练习)</p>
+              <p style="font-weight: 500">透由发现美的眼睛去挖掘他人优点，渐次去除自己的观过心。</p>
+            </div>
+          </div>          
+            {{deed1 | safe}}
+            {% if hide == False %}
+              <form action="" method="post">
+                {% csrf_token %}
+                <h5 style="background-color: #e6ccff">
+                {{ form1.as_p }}
+                </h5>
+                <input type="submit" name="btnform1" value="Submit (供养)" onclick="validate1()">
+              </form>
+            {% endif %}
+          </div>
+
+          <div class="col-sm">
+          <div id = "jumbo3"  class = "jumbotron jumbotron-fluid">
+            <div class="container">
+              <p style="font-weight: 700">Remembering Kindness</p>
+              <p style="font-weight: 600">(Target: Triple Gem, Teachers)</p>
+              <p style="font-weight: 400">Pay gratitude to the excellent teachers, the source of all happiness and goodness, for anything encountered today.</p>
+              <p style="font-weight: 800">修信念恩 (对象：特别指师长)</p>
+              <p style="font-weight: 500">思惟一天所遇到任何善果，其因怎么来，都离不开师长的恩。</p>
+            </div>
+          </div>           
+            {{deed2 | safe}}
+            {% if hide == False %}
+              <form action="" method="post">
+                {% csrf_token %}
+                <h5 style="background-color: #ffbaf7">
+                {{ form2.as_p }}
+                </h5>
+                <input type="submit" name="btnform2" value="Submit (供养)" onclick="validate2()">
+              </form>
+            {% endif %}
+          </div>
+    </div>
+  </div>
+
+    <br>
+   
+      {% if post_success == True %}
+        <script>
+            alert("供养成功! 愿此殊胜功德 回向法界有情 尽除一切罪障 共成无上菩提");
+        </script>
+      {% endif %} 
+    
+
+    <audio id="myAudio">
+      <source src="{% static 'media/mandala.mp3' %}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+  </div>
+  <!-- <script src="{% static 'scroll.js' %}"></script> -->
+
+<script>
+
+function validate1()
+{
+  var name = document.getElementById("name1").value;
+  var deed = document.getElementById("deed1").value;
+  
+  if (name != '' && deed != '')
+  {
+    alert("Your offerings is being submitted\n您的供养已提交");
+  }
+}
+
+function validate2()
+{
+  var name = document.getElementById("name2").value;
+  var deed = document.getElementById("deed2").value;
+  
+  if (name != '' && deed != '')
+  {
+    alert("Your offerings is being submitted\n您的供养已提交");
+  }
+}
+
+function validate3()
+{
+  var name = document.getElementById("name3").value;
+  var deed = document.getElementById("deed3").value;
+  
+  if (name != '' && deed != '')
+  {
+    alert("Your offerings is being submitted\n您的供养已提交");
+  }
+}
+
+function mandala()
+{
+  var pwd = document.getElementById("pwd")
+  if (pwd.value == "ilovelamrim"){
+
+    TweenLite.set("#container1",{perspective:1000})
+    TweenLite.set("img",{xPercent:"-50%",yPercent:"-50%"})
+
+    var total = 30;
+    var warp = document.getElementById("container1"),	w = window.innerWidth , h = window.innerHeight;
+    
+    for (i=0; i<total; i++){ 
+      var Div = document.createElement('div');
+      TweenLite.set(Div,{attr:{class:'dot'},x:R(0,w),y:R(-200,-150),z:R(-200,200)});
+      warp.appendChild(Div);
+      animm(Div);
+    }
+
+    function animm(elm){   
+    TweenMax.to(elm,R(6,15),{y:h+100,ease:Linear.easeNone,repeat:-1,delay:-15});
+    TweenMax.to(elm,R(4,8),{x:'+=100',rotationZ:R(0,180),repeat:-1,yoyo:true,ease:Sine.easeInOut});
+    TweenMax.to(elm,R(2,8),{rotationX:R(0,360),rotationY:R(0,360),repeat:-1,yoyo:true,ease:Sine.easeInOut,delay:-5});
+  };
+
+
+    function R(min,max) {return min+Math.random()*(max-min)};
+
+    $('body').sakura();
+	
+	  //gimmick('body');
+
+    //var x = document.getElementById("myAudio"); 
+    //x.play();
+    
+  }
+}
+
+function gimmick(el) {
+
+    var exists = document.getElementById('gimmick')
+    if (exists) {
+        exists.parentNode.removeChild(exists);
+        return false;
+    }
+
+    var element = document.querySelector(el);
+    var canvas = document.createElement('canvas'),
+        ctx = canvas.getContext('2d'),
+        focused = false;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.id = 'gimmick'
+
+    var coin = new Image();
+    coin.src = 'http://i.imgur.com/5ZW2MT3.png'
+    // 440 wide, 40 high, 10 states
+    coin.onload = function () {
+        element.appendChild(canvas)
+        focused = true;
+        drawloop();
+    }
+    var coins = []
+
+    function drawloop() {
+        if (focused) {
+            requestAnimationFrame(drawloop);
+        }
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        if (Math.random() < .3) {
+            coins.push({
+                x: Math.random() * canvas.width | 0,
+                y: -50,
+                dy: 3,
+                s: 0.5 + Math.random(),
+                state: Math.random() * 10 | 0
+            })
+        }
+        var i = coins.length
+        while (i--) {
+            var x = coins[i].x
+            var y = coins[i].y
+            var s = coins[i].s
+            var state = coins[i].state
+            coins[i].state = (state > 9) ? 0 : state + 0.1
+            coins[i].dy += 0.3
+            coins[i].y += coins[i].dy
+
+            ctx.drawImage(coin, 44 * Math.floor(state), 0, 44, 40, x, y, 44 * s, 40 * s)
+
+            if (y > canvas.height) {
+                coins.splice(i, 1);
+            }
+        }
+    }
+}
+</script>
+
+{% endblock content %}
+{% block script_content %}
+
+<script>
+    /*
+      $(function() {
+          
+          $('body').sakura();
+      });
+      */
+   </script> 
+
+{% endblock script_content %}   
+  
+  <script>
+  function validate()
+  {
+    var valid = true;
+    // do some validation here to decide whether the post is going to be successful or not.
+    if (valid)
+    {
+      alert("Going to post your data now!");
+      return true;
+    }
+    else
+    {
+      return false; // form won't post
+    }
+  }
+  </script>  
+

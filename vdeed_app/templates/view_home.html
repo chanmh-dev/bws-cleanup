@@ -1,0 +1,121 @@
+{% extends 'base.html' %} {% load static %} {% block title %}
+<link rel="stylesheet" href="{% static 'styles_vesak.css' %}" type="text/css" />
+<title>Virtuous Deeds</title>
+{% endblock title %} {% block content %}
+
+<!-- Header-->
+<header class="masthead d-flex align-items-center">
+  <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+  <div class="btn-div" id="counter-label" onclick="location.href='#about';">
+    释迦心咒次数:
+    <span class="card-counter" id="total-migtsema-counter">
+      {{total_misc_can_counter}}
+    </span>
+  </div>
+  <h2 class="animate-flicker">Om<br>Muni<br>Muni<br>Maha<br>Muniye<br>Soha</h2>
+  <audio id="player" src="../static/media/mantra.mp3"></audio>
+  <div class="audio-icon">
+    <a onclick="document.getElementById('player').play()"><i class='fa fa-volume-up fa-2x'></i></a>
+  </div>
+  <div class="clouds">
+    <img src="../static/images/cloud1.png" style="--i: 1" ; />
+    <img src="../static/images/cloud2.png" style="--i: 2" ; />
+    <img src="../static/images/cloud3.png" style="--i: 3" ; />
+    <img src="../static/images/cloud4.png" style="--i: 4" ; />
+    <img src="../static/images/cloud5.png" style="--i: 5" ; />
+
+    <img src="../static/images/cloud1.png" style="--i: 10" ; />
+    <img src="../static/images/cloud2.png" style="--i: 9" ; />
+    <img src="../static/images/cloud3.png" style="--i: 8" ; />
+    <img src="../static/images/cloud4.png" style="--i: 7" ; />
+    <img src="../static/images/cloud5.png" style="--i: 6" ; />
+  </div>
+</header>
+
+<!-- About-->
+
+<div class="container px-4 px-lg-5 text-center" id="about">
+  <p><strong>Current target (当前目标): <span style="color:blue">{{current_target}}</strong></span></p>
+  <div class="bar_group">
+    <div
+      style="display: none"
+      class="bar_group__bar thick"
+      tooltip="true"
+      value="{{current_target}}"
+    ></div>
+    <div
+      class="bar_group__bar thick"
+      show_values="true"
+      tooltip="true"
+      value="{{total_misc_can_counter}}"
+    ></div>
+  </div>
+
+  {% for target in completed_targets %}
+  <p>
+    目标 {{ forloop.revcounter }} 已圆满 ({{target.date_time | date:"d-m-y" }})
+  </p>
+  <div class="bar_group">
+    <div
+      class="bar_group__bar thick"
+      show_values="true"
+      tooltip="true"
+      value="{{target.misc_can_target}}"
+    ></div>
+  </div>
+
+  {% endfor %}
+</div>
+<br />
+<!-- Services-->
+
+<script src="{% static 'bars.js' %}"></script>
+
+<script>
+  $(document).ready(function () {
+    $("#total-migtsema-counter").text("{{total_misc_can_counter}}");
+
+    $(".card-counter").each(function () {
+      $(this)
+        .prop("Counter", 0)
+        .animate(
+          {
+            Counter: $(this).text(),
+          },
+          {
+            duration: 3000,
+            easing: "swing",
+            step: function (now) {
+              $(this).text(Math.ceil(now));
+            },
+          }
+        );
+    });
+  });
+
+</script>
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+  
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
+  
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+  
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+  
+  </script>
+
+{% endblock content %}

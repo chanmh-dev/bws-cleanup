@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<style>
+  body {
+    background: #eaf6f6;
+  }
+</style>
+<h1 style="text-align: center; margin-top: 1em">Login (登录)</h1>
+<div class="container d-flex align-items-center justify-content-center">
+  <form class="site-form" action="" method="post">
+    {% csrf_token %} {{form}}
+    <input
+      class="btn btn-info"
+      type="submit"
+      value="Login (登录)"
+      style="margin-top: 1em"
+    />
+    <small class="text-muted ml-2">
+      <a href="{% url 'reset_password' %}">Forgot Password</a>
+    </small>
+  </form>
+</div>
+{% endblock content %}

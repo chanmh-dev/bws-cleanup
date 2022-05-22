@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Global Lamrim II Sharing 广海明月分享</title>
+{% endblock title %}
+
+{% block additional_styles %}
+<style>
+  body {
+    background-image: url(../static/images/scrollTextBg.jpg);
+  }
+</style>
+{% endblock %}    
+
+{% block content %}
+<div id='container1'></div>
+<div class="container-fluid">
+	<input type="password" id="pwd" name="pwd" minlength="8"> <button type="button" onclick="mandala()">Mandala Offering</button>  
+	<div class="row">
+		<div class="col-sm-8 first-column">
+		<!--<img class="img-fluid" src="{% static 'images/cny.jpg' %}"  width="100%" height="100%"> -->
+			<img src = "{% static 'images/TripleGem1.jpg' %}" width="93%" height="auto" alt =""  class="img-fluid " class="center"> 
+		<!--<iframe width="100%" height="50%" src="https://www.youtube.com/embed/4PnCpMX7bKI?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+		</div>
+	
+		<div class="col-sm-4 second-column">
+		{{deed4 | safe}}
+		<!--
+      <form action="" method="post">
+        {% csrf_token %}
+        <h5 style="background-color: #e6ccff">
+        {{ form_globalLamrim2.as_p }}
+        </h5>
+        <input type="submit" name="btnform4" value="Submit (供养)" onclick="validate4()">
+      </form>     
+      --> 
+		</div> 
+	</div>
+
+	<br>
+	{% if post_success == True %}
+    <script>
+      alert("供养成功! 愿此殊胜功德 回向法界有情 尽除一切罪障 共成无上菩提");
+	</script>
+	{% endif %} 
+</div>
+
+<script>
+function validate4()
+{
+  var name = document.getElementById("name4").value;
+  var deed = document.getElementById("deed4").value;
+  
+  if (name != '' && deed != '')
+  {
+    alert("Your offerings is being submitted\n您的供养已提交");
+  }
+}
+
+function mandala()
+{
+  var pwd = document.getElementById("pwd")
+  if (pwd.value == "ilovelamrim"){
+
+    TweenLite.set("#container1",{perspective:1000})
+    TweenLite.set("img",{xPercent:"-50%",yPercent:"-50%"})
+
+    var total = 30;
+    var warp = document.getElementById("container1"),	w = window.innerWidth , h = window.innerHeight;
+    
+    for (i=0; i<total; i++){ 
+      var Div = document.createElement('div');
+      TweenLite.set(Div,{attr:{class:'dot'},x:R(0,w),y:R(-200,-150),z:R(-200,200)});
+      warp.appendChild(Div);
+      animm(Div);
+    }
+
+    function animm(elm){   
+    TweenMax.to(elm,R(6,15),{y:h+100,ease:Linear.easeNone,repeat:-1,delay:-15});
+    TweenMax.to(elm,R(4,8),{x:'+=100',rotationZ:R(0,180),repeat:-1,yoyo:true,ease:Sine.easeInOut});
+    TweenMax.to(elm,R(2,8),{rotationX:R(0,360),rotationY:R(0,360),repeat:-1,yoyo:true,ease:Sine.easeInOut,delay:-5});
+  };
+
+
+    function R(min,max) {return min+Math.random()*(max-min)};
+
+    $('body').sakura();
+	
+	  //gimmick('body');
+
+    //var x = document.getElementById("myAudio"); 
+    //x.play();
+    
+  }
+}
+</script>
+
+{% endblock content %}
+{% block script_content %}
+
+{% endblock script_content %}   
+
+

@@ -1,0 +1,37 @@
+body {
+    background-image: url("../images/tulips1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; 
+   }
+
+h4 {
+    background-color: rgb(250, 242, 250);
+}   
+
+
+.col-sm {
+    /* background-color: #e6f2ff; */
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+
+.mqcontainer {
+    width: 100%;
+    height: 18em;
+    margin: 1em auto;
+    overflow: hidden;
+    background: white;
+    position: relative;
+    box-sizing: border-box;
+}
+
+
+.marquee {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border: solid #ccc;
+}
+
+

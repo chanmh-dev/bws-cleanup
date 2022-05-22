@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <!--
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
+    />
+
+    <!--google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Montserrat:wght@100;400;900&family=Noto+Sans+SC:wght@400;900&family=Ubuntu:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'marq.css' %}" />
+    <link
+      rel="stylesheet"
+      media="screen"
+      href="{% static 'jquery.sakura.min.css' %}"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="{% static 'alert.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'bars.css' %}" type="text/css" />
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'jquery.alert.js' %}"></script>
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script-->
+    <script
+      src="https://kit.fontawesome.com/0c0ec98f97.js"
+      crossorigin="anonymous"
+    ></script>
+
+    {% block title %} {% endblock title %} {% block additional_styles %}
+    <style>
+
+      body {
+        /*background-image: url(../static/images/autumn_leaves.jpg);*/
+      }
+
+      }
+    </style>
+    {% endblock %}
+
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light"
+      style="z-index: 10"
+    >
+      <a class="navbar-brand" href="#"
+        ><img
+          src="{% static 'images/bws-logo.jpg' %}"
+          alt="BWS"
+          height="50"
+          width="155"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="/index/index"
+            >Home <span class="sr-only">(current)</span></a
+          >
+          <!--<a
+            class="nav-item nav-link"
+            active
+            href="/view_offerings/view_offerings"
+            >View Offerings
+          </a>-->
+          <!--<a class="nav-item nav-link" active href="/view_home/view_home"
+            >View Home
+          </a>-->
+          <!--<a class="nav-item nav-link" active href="/view_merits/view_merits"
+            >View Merits
+          </a>-->
+          {% if user.is_authenticated %}
+          <a
+            class="nav-item nav-link"
+            active
+            href="{% url 'accounts:view_login' %}"
+            >Add Items
+          </a>
+          <!--a
+            class="nav-item nav-link"
+            active
+            href="{% url 'accounts:view_login_counter' %}"
+            >Add Counter
+          </!a-->
+          <form
+            class="logout-link"
+            action="{% url 'accounts:view_logout' %}"
+            method="post"
+          >
+            {% csrf_token %}
+            <button id="logoutButton" type="submit">Logout</button>
+          </form>
+          {% else %}
+          <a
+            class="nav-item nav-link"
+            active
+            href="{% url 'accounts:view_signup' %}"
+            >Register
+          </a>
+          <a
+            class="nav-item nav-link"
+            active
+            href="{% url 'accounts:view_login' %}"
+            >Login
+          </a>
+          <!--a
+            class="nav-item nav-link"
+            active
+            href="{% url 'accounts:view_login_counter' %}"
+            >Login
+          </a-->
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+  </head>
+  <body>
+    {% block content %} {% endblock content %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--
+    <script src="{% static 'jquery.pause.min.js' %}"></script>
+    <script src="{% static 'jquery.pause.js' %}"></script>    
+    <script src="{% static 'jquery.marquee.min.js' %}"></script>
+    <script src="{% static 'jquery.marquee.js' %}"></script> -->
+    <script src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
+    <script src="{% static 'scrollMarquee.js' %}"></script>
+    <script src="{% static 'jquery.sakura.min.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"></script>
+
+    {% block script_content %} {% endblock script_content %}
+
+    <script>
+      // Handle Bootstrap carousel slide event
+      $(".carousel").carousel({
+        interval: 6000,
+      });
+
+      $.myjQuery = function () {
+        alert("jQuery");
+      };
+
+      function display() {
+        $.myjQuery();
+      }
+    </script>
+  </body>
+</html>

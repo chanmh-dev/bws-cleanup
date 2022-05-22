@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>View Offerings 善行供养</title>
+{% endblock title %}
+
+{% block additional_styles %}
+<style>
+  body {
+    background-image: url(../static/images/clouds_in_the_sky.jpg);
+  }
+</style>
+{% endblock %} 
+
+{% block content %}
+  <div class="container-fluid" >
+    <h1 style="font-family:simhei">View Offerings 善行供养</h1>
+    <br>
+    <div class="row">
+      <div class="col text-center"> 
+        <img src = "{% static 'images/TripleGem.jpg' %}" alt =""  class="img-fluid " class="center">   
+      </div>
+    </div>  
+    <div class="container-fluid">    
+      <div class="row">  
+          <div class="col-sm">      
+            <h5 style="background-color: #e6ccff">
+              <p>OMAK (观功念恩):</p>
+              <p> {{filtered_from_date1}} ~ {{filtered_to_date1}}</p>
+              <p>Total (总数) {{total_deeds1_count}}</p>
+              <br>
+              <p>Rejoice to the top 5 contributors:</p>              
+              <p>随喜首五名供养次数最多者:</p>
+              {% for item in deeds1_top_five %}
+                <li>{{ item.name }} ({{ item.count }})</li>
+              {% endfor %}               
+            </h5>       
+            {{text1 | safe}}
+            <form action="" method="post">
+                {% csrf_token %}
+                <h5><mark>From</mark></h5>            
+                {{ form.date1_from }}
+                <h5><mark>To</mark></h5>            
+                {{ form.date1_to }}
+                <input type="submit" name="btnform" value="Submit" >
+            </form> 
+          </div>
+
+          <div class="col-sm">      
+            <h5 style="background-color: #ffbaf7">            
+              <p>Remembering Kindness (修信念恩):</p>
+              <p> {{filtered_from_date2}} ~ {{filtered_to_date2}}</p>
+              <p>Total (总数) {{total_deeds2_count}}</p>
+              <br>
+              <p>Rejoice to the top 5 contributors:</p>              
+              <p>随喜首五名供养次数最多者:</p>
+              {% for item in deeds2_top_five %}
+                <li>{{ item.name }} ({{ item.count }})</li>
+              {% endfor %}                
+            </h5>             
+            {{text2 | safe}}
+            <form action="" method="post">
+                {% csrf_token %}
+                <h5><mark>From</mark></h5>            
+                {{ form2.date2_from }}
+                <h5><mark>To</mark></h5>            
+                {{ form2.date2_to }}
+                <input type="submit" name="btnform2" value="Submit">
+            </form>           
+          </div>
+
+          <div class="col-sm">  
+            <h5 style="background-color: #ffcccc">            
+              <p>Virtuous deeds (善行点滴):</p>
+              <p> {{filtered_from_date3}} ~ {{filtered_to_date3}}</p>
+              <p>Total (总数) {{total_deeds3_count}}</p>     
+              <br>
+              <p>Rejoice to the top 5 contributors:</p>              
+              <p>随喜首五名供养次数最多者:</p>
+              {% for item in deeds3_top_five %}
+                <li>{{ item.name }} ({{ item.count }})</li>
+              {% endfor %}                       
+            </h5>                
+            {{text3 | safe}}
+            <form action="" method="post">
+                {% csrf_token %}
+                <h5><mark>From</mark></h5>            
+                {{ form3.date3_from }}
+                <h5><mark>To</mark></h5>            
+                {{ form3.date3_to }}
+                <input type="submit" name="btnform3" value="Submit">
+            </form>           
+          </div>
+      </div>
+    </div>
+    <br>
+
+    <br>
+
+  </div>
+ 
+{% endblock content %}
